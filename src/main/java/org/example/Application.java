@@ -54,8 +54,10 @@ public class Application {
         //добавление бочки с уже существующей этикеткой
         storageService.putBarrel(label2, barrel3);
 
+        System.out.println(storageService);
+
         //достать бочку по этикетке
-        storageService.getBarrel(label3);
+        storageService.getBarrel(label1);
 
         System.out.println(storageService);
 
@@ -63,10 +65,11 @@ public class Application {
         storageService.getBarrel(label4);
 
         //выдать список всех этикеток
-        storageService.getAllLabels();
+        System.out.println("Существующе этикетки: " + storageService.getAllLabels());
 
         //достать все бочки из погреба
         storageService.getAllBarrels();
+
 
         System.out.print(storageService);
     }
