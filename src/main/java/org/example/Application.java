@@ -15,12 +15,17 @@ BarrelStorageService - сервис, выдающий бочки
 barrels - массив бочек
 Barrel - бочка
 Alcohol - абстарктный класс
+
+HashMap - это карта ключ -> значение (ключ к значению), например, {a -> 1, b -> 2, c -> 2, d -> 1}
+Обратите внимание, что в моем примере выше, в HashMap не должно быть дубликатов ключей,
+но они могут иметь дублирующиеся значения.
  */
 
 import org.example.entity.*;
 import org.example.service.BarrelStorageService;
 
-import java.util.HashSet;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Application {
     public static void main(String[] args){
@@ -30,36 +35,39 @@ public class Application {
         Label label3 = new Label("Самогон от соседа");
         Label label4 = new Label("Папино домашнее вино");
 
+        //создание бочек
+        Barrel barrel1 = new Barrel(20,new Wine(15),20);
+        Barrel barrel2 = new Barrel(15,new Wiskey(40),50);
+        Barrel barrel3 = new Barrel(30,new Vodka(40),50);
+        Barrel barrel4 = new Barrel(10,new Wine(17),25);
 
         //создание нового объекта погреб
         BarrelStorageService storageService = new BarrelStorageService();
 
-        //создание бочек
-        Barrel barrel1 = new Barrel(20,new Wine(15),20, label1);
-        Barrel barrel2 = new Barrel(15,new Wiskey(40),50, label2);
-        Barrel barrel3 = new Barrel(30,new Vodka(40),50, label3);
-        Barrel barrel4 = new Barrel(10,new Wine(17),25, label4);
+        //добавление бочек с этикетками в погреб
+        storageService.putBarrel(label1, barrel1);
+        storageService.putBarrel(label2, barrel2);
+        storageService.putBarrel(label3, barrel3);
 
-        //положить бочки в погреб
-        storageService.addBarrel(barrel1);
-        System.out.println("Этикетка бочки 1 " + barrel1.getLabel());
-        storageService.addBarrel(barrel2);
-        System.out.println("Этикетка бочки 2 " + barrel2.getLabel());
-        storageService.addBarrel(barrel3);
-        System.out.println("Этикетка бочки 3 " + barrel3.getLabel());
-
-        //достать бочку
-        storageService.getBarrel(barrel1);
-        //погреб без взятой бочки
         System.out.println(storageService);
 
-        //положить существующую бочку
-        storageService.saveBarrel(barrel2);
+        //добавление бочки с уже существующей этикеткой
+        storageService.putBarrel(label2, barrel3);
 
-        //положить новую бочку
-        storageService.saveBarrel(barrel4);
+        //достать бочку по этикетке
+        storageService.getBarrel(label3);
 
-        //вывести погреб
         System.out.println(storageService);
+
+        //достать бочку по несуществующей этикетке
+        storageService.getBarrel(label4);
+
+        //выдать список всех этикеток
+        storageService.getAllLabels();
+
+        //достать все бочки из погреба
+        storageService.getAllBarrels();
+
+        System.out.print(storageService);
     }
 }
