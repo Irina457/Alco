@@ -34,16 +34,16 @@ public class BarrelStorageService {
 
     //      3) Достать все бочки из погреба. Погреб остаётся после этого пустым
     public List getAllBarrels() {
-        ArrayList<Barrel> barrel = new ArrayList<>(barrels.values());
+        ArrayList<Barrel> allbarrels = new ArrayList<>(barrels.values());
         barrels.clear();
         System.out.println("Погреб пустой!");
-        return barrel;
+        return allbarrels;
     }
 
     //      4) Выдать список всех этикеток (соотвественно, погреб не изменяется после этого)
     public Set<Label> getAllLabels() {
-        Set<Label> label = barrels.keySet();
-        return label;
+        Set<Label> labels = barrels.keySet();
+        return labels;
     }
 
     @Override
