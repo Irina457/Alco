@@ -47,10 +47,20 @@ public class Application {
             storageService.putBarrel(label2, barrel2);
             storageService.putBarrel(label3, barrel3);
 
-            System.out.println(storageService);
+            System.out.println("1 " + storageService);
+
+            System.out.println("2 " + storageService.getBarrel(label1));
+            System.out.println("3 " + storageService);
+
+            //достать бочку по этикетке еще раз
+            System.out.println("4 " + storageService.getBarrel(label1));
+            System.out.println("5 " + storageService);
+
+            storageService.putBarrel(label1, barrel1);
 
             //добавление бочки с уже существующей этикеткой
             storageService.putBarrel(label2, barrel3);
+            System.out.println();
 
             System.out.println(storageService);
 

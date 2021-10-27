@@ -12,14 +12,15 @@ public class BarrelStorageService {
     //      1) достать бочку по этикетке. Если такой бочки нет - выдать ошибку с подробным описанием.
     //      после этого данная бочка в погребе, соответственно, исчезает
     public Barrel getBarrel(Label label) throws NotExistBarrelException {
+        Barrel a;
         if (!barrels.containsKey(label)) {
             // если исключительная ситуация, то сгенерировать исключение
             throw new NotExistBarrelException("Ошибка! Бочки с такой этикеткой не существует!");
         } else {
-            barrels.get(label);
+            a = barrels.get(label);
             barrels.remove(label);
         }
-        return barrels.get(label);
+        return a;
     }
 
     //      2) положить бочку с этикеткой. Если такая этикетка есть - выдать ошибку с подробным описанием
