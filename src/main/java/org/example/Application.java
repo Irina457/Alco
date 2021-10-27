@@ -17,8 +17,6 @@ Barrel - бочка
 Alcohol - абстарктный класс
 
 HashMap - это карта ключ -> значение (ключ к значению), например, {a -> 1, b -> 2, c -> 2, d -> 1}
-Обратите внимание, что в моем примере выше, в HashMap не должно быть дубликатов ключей,
-но они могут иметь дублирующиеся значения.
  */
 
 import org.example.entity.*;
@@ -43,34 +41,39 @@ public class Application {
 
         //создание нового объекта погреб
         BarrelStorageService storageService = new BarrelStorageService();
+        try {
+            //добавление бочек с этикетками в погреб
+            storageService.putBarrel(label1, barrel1);
+            storageService.putBarrel(label2, barrel2);
+            storageService.putBarrel(label3, barrel3);
 
-        //добавление бочек с этикетками в погреб
-        storageService.putBarrel(label1, barrel1);
-        storageService.putBarrel(label2, barrel2);
-        storageService.putBarrel(label3, barrel3);
+            System.out.println(storageService);
 
-        System.out.println(storageService);
+            //добавление бочки с уже существующей этикеткой
+            storageService.putBarrel(label2, barrel3);
 
-        //добавление бочки с уже существующей этикеткой
-        storageService.putBarrel(label2, barrel3);
+            System.out.println(storageService);
 
-        System.out.println(storageService);
+            //достать бочку по этикетке
+            storageService.getBarrel(label1);
 
-        //достать бочку по этикетке
-        storageService.getBarrel(label1);
+            System.out.println(storageService);
 
-        System.out.println(storageService);
+            //достать бочку по несуществующей этикетке
+            storageService.getBarrel(label4);
+            System.out.println();
 
-        //достать бочку по несуществующей этикетке
-        storageService.getBarrel(label4);
+            //выдать список всех этикеток
+            System.out.println("Существующе этикетки: " + storageService.getAllLabels());
 
-        //выдать список всех этикеток
-        System.out.println("Существующе этикетки: " + storageService.getAllLabels());
+            //достать все бочки из погреба
+            storageService.getAllBarrels();
 
-        //достать все бочки из погреба
-        storageService.getAllBarrels();
-
-
-        System.out.print(storageService);
+            System.out.print(storageService);
+        }catch (NotExistBarrelException e){
+            System.err.println(e.getMessage());
+        }catch (AlreadyExistsBarrelException e){
+            System.err.println(e.getMessage());
+        }
     }
 }
