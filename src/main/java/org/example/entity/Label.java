@@ -11,7 +11,13 @@ public class Label {
     public Label(String label) {
         this.label = label;
     }
+    //генерация целочисленного кода объекта
+    @Override
+    public int hashCode() {
+        return Objects.hash(label);
+    }
 
+    //сравнение объектов
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -20,10 +26,7 @@ public class Label {
         return Objects.equals(label, label1.label);
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(label);
-    }
+
 
     @Override
     public String toString() {
