@@ -26,8 +26,6 @@ public class Label {
         return Objects.equals(label, label1.label);
     }
 
-
-
     @Override
     public String toString() {
         return "Label{" +

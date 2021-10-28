@@ -49,6 +49,9 @@ public class Application {
 
             System.out.println("1 " + storageService);
 
+            //выдать список всех этикеток
+            System.out.println("Существующе этикетки: " + storageService.getAllLabels());
+
             System.out.println("2 " + storageService.getBarrel(label1));
             System.out.println("3 " + storageService);
 
@@ -73,16 +76,11 @@ public class Application {
             storageService.getBarrel(label4);
             System.out.println();
 
-            //выдать список всех этикеток
-            System.out.println("Существующе этикетки: " + storageService.getAllLabels());
-
             //достать все бочки из погреба
             storageService.getAllBarrels();
 
             System.out.print(storageService);
-        }catch (NotExistBarrelException e){
-            System.err.println(e.getMessage());
-        }catch (AlreadyExistsBarrelException e){
+        }catch (NotExistBarrelException | AlreadyExistsBarrelException e){
             System.err.println(e.getMessage());
         }
     }

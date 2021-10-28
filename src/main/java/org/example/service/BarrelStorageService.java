@@ -7,20 +7,20 @@ import org.example.entity.NotExistBarrelException;
 import java.util.*;
 
 public class BarrelStorageService {
-    private final Map<Label, Barrel> barrels = new HashMap<Label, Barrel>();
+    private final Map<Label, Barrel> barrels = new HashMap<>();
 
     //      1) достать бочку по этикетке. Если такой бочки нет - выдать ошибку с подробным описанием.
     //      после этого данная бочка в погребе, соответственно, исчезает
     public Barrel getBarrel(Label label) throws NotExistBarrelException {
-        Barrel a;
+        Barrel someBarrel;
         if (!barrels.containsKey(label)) {
             // если исключительная ситуация, то сгенерировать исключение
             throw new NotExistBarrelException("Ошибка! Бочки с такой этикеткой не существует!");
         } else {
-            a = barrels.get(label);
+            someBarrel = barrels.get(label);
             barrels.remove(label);
         }
-        return a;
+        return someBarrel;
     }
 
     //      2) положить бочку с этикеткой. Если такая этикетка есть - выдать ошибку с подробным описанием
@@ -33,17 +33,16 @@ public class BarrelStorageService {
     }
 
     //      3) Достать все бочки из погреба. Погреб остаётся после этого пустым
-    public List getAllBarrels() {
-        ArrayList<Barrel> allbarrels = new ArrayList<>(barrels.values());
+    public List<Barrel> getAllBarrels() {
+        ArrayList<Barrel> allBarrels = new ArrayList<>(barrels.values());
         barrels.clear();
         System.out.println("Погреб пустой!");
-        return allbarrels;
+        return allBarrels;
     }
 
     //      4) Выдать список всех этикеток (соотвественно, погреб не изменяется после этого)
     public Set<Label> getAllLabels() {
-        Set<Label> labels = barrels.keySet();
-        return labels;
+        return barrels.keySet();
     }
 
     @Override
